@@ -1,0 +1,12 @@
+resources_id: your_resources_page_id
+
+categories:
+  - name: AI开发
+    id: your_ai_dev_page_id
+    keywords: Claude,GPT,Gemini,LLM,MCP,Skills,Cursor,AI工具,前端,UI
+  - name: Web3相关
+    id: your_web3_page_id
+    keywords: DeFi,链上,套利,合约,代币,钱包,Web3,Solana,ETH
+  - name: 内容创作
+    id: your_content_page_id
+    keywords: 小红书,公众号,视频,播客,内容,文案,剪辑

@@ -1,0 +1,4 @@
+inbox_id: your_inbox_page_id
+target_id: your_target_page_id
+batch_size: 3
+note_language: zh
