@@ -10,6 +10,7 @@ Notion 效率工作流技能合集。
 |------|------|
 | [nby-notion-reading-notes](./nby-notion-reading-notes/) | AI 精读笔记 — 自动为 Notion Inbox 文章生成深度阅读笔记 |
 | [nby-notion-smart-categorize](./nby-notion-smart-categorize/) | 智能归类 — 将 Notion 页面自动归类到 Resources 子目录 |
+| [nby-skill-library-manager](./nby-skill-library-manager/) | 技能库管理 — Git 版本化技能库 + 符号链接启用/禁用，配合官方 skill-creator 使用 |
 
 ## 安装
 

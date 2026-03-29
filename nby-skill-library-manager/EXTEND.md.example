@@ -1,0 +1,23 @@
+---
+library_path: ~/my-skill-library/library
+enabled_path: ~/my-skill-library/enabled
+readme_path: ~/my-skill-library/README.md
+skill_prefix: ""
+---
+
+# My Skill Library
+
+## Paths
+
+- **Library**: `~/my-skill-library/library` — where skill source directories live
+- **Enabled**: `~/my-skill-library/enabled` — where symlinks go (Claude loads from here)
+- **README**: `~/my-skill-library/README.md` — skill table auto-updated on create/remove
+
+## Naming Convention
+
+- **Prefix**: leave empty or set e.g. `nby-` for team skills
+- **Format**: lowercase kebab-case
+
+## Notes
+
+Add any personal notes about your library setup here.
