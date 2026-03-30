@@ -1,0 +1,35 @@
+# Auto Edit Preferences
+# Copy to .nby-skills/nby-auto-edit/EXTEND.md and customize
+
+# Video
+resolution: "720x1280"       # 720x1280 (vertical) or 1920x1080 (horizontal)
+fps: 30
+codec: "h264"
+render_concurrency: 1        # Always 1 to prevent frame jitter
+output_dir: "out/"
+
+# ASR
+asr_tool: "mlx-whisper"      # mlx-whisper (Mac) / whisper / coli
+asr_model: "large-v3"        # large-v3 recommended, base for speed
+
+# Cutting
+cut_padding_before: 0.1      # seconds before first word
+cut_padding_after: 0.15      # seconds after last word
+
+# TTS Voice (Edge TTS, free)
+tts_voice_male: "zh-CN-YunxiNeural"
+tts_voice_female: "zh-CN-XiaoxiaoNeural"
+tts_voice_en: "en-US-GuyNeural"
+
+# Green Screen
+green_screen_method: "rembg"      # chromakey or rembg
+chromakey_color: "0x00FF00"
+chromakey_similarity: 0.22
+
+# Audio
+bgm_volume: 0.15
+
+# Subtitles
+subtitle_font_size: 38
+subtitle_highlight_color: "#FF3B3B"
+subtitle_en_translation: true

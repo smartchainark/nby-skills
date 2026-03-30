@@ -11,6 +11,7 @@ A collection of Claude Code skills for Notion productivity workflows.
 | [nby-notion-reading-notes](./nby-notion-reading-notes/) | AI-powered deep reading notes for Notion Inbox articles |
 | [nby-notion-smart-categorize](./nby-notion-smart-categorize/) | Intelligently categorize Notion pages into Resources subdirectories |
 | [nby-skill-library-manager](./nby-skill-library-manager/) | Skill library manager — organizes skills in a Git-versioned library with symlink-based enable/disable. Works alongside the official `skill-creator` plugin (it handles HOW, this handles WHERE) |
+| [nby-auto-edit](./nby-auto-edit/) | AI auto video editing — from raw recordings to finished video via ASR, green-screen, TTS, subtitles, and Remotion rendering |
 
 ## Installation
 
