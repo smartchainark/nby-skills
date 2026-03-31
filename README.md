@@ -42,8 +42,8 @@ Each skill uses two config files stored **outside** the skill directory (safe fr
 
 | File | Purpose | Contains |
 |------|---------|----------|
-| `.env` | Credentials | Notion API token |
-| `EXTEND.md` | Preferences | Page IDs, categories, options |
+| `.env` | Credentials | API tokens, session IDs |
+| `EXTEND.md` | Preferences | Page IDs, default settings, options |
 
 ### Config File Locations (priority order)
 
@@ -56,37 +56,57 @@ Same paths apply for `EXTEND.md`.
 
 ### First-Time Setup
 
-No manual config needed — the skill will **automatically guide** setup on first use, asking for:
+No manual config needed — each skill will **automatically guide** setup on first use.
 
-1. Notion API token
-2. Page IDs
-3. Where to save (project or user level)
+### Notion Skills Setup
 
-### Manual Setup
-
-```bash
-# Create config directory
-mkdir -p ~/.nby-skills/nby-notion-reading-notes
-
-# Copy and edit templates
-cp nby-notion-reading-notes/.env.example ~/.nby-skills/nby-notion-reading-notes/.env
-cp nby-notion-reading-notes/EXTEND.md.example ~/.nby-skills/nby-notion-reading-notes/EXTEND.md
-# Edit both files with your values
-```
-
-### Getting your Notion API Token
+<details>
+<summary>Getting your Notion API Token & Page IDs</summary>
 
 1. Go to [Notion Integrations](https://www.notion.so/my-integrations)
 2. Create a new integration
 3. Copy the Internal Integration Secret
 4. Share the relevant Notion pages with your integration
 
-### Finding Page IDs
-
-Open a Notion page in the browser. The page ID is the 32-character string in the URL:
+Page IDs can be found in the URL — the 32-character string after the page title:
 ```
 https://www.notion.so/Your-Page-Title-{page_id_here}
 ```
+
+Manual setup:
+```bash
+mkdir -p ~/.nby-skills/nby-notion-reading-notes
+cp nby-notion-reading-notes/.env.example ~/.nby-skills/nby-notion-reading-notes/.env
+cp nby-notion-reading-notes/EXTEND.md.example ~/.nby-skills/nby-notion-reading-notes/EXTEND.md
+```
+</details>
+
+### Jimeng API Setup
+
+<details>
+<summary>Docker deployment & session ID</summary>
+
+**1. Deploy the service (one command):**
+```bash
+docker run -it -d --init --name jimeng-free-api-all \
+  -p 8000:8000 -e TZ=Asia/Shanghai \
+  wwwzhouhui569/jimeng-free-api-all:latest
+```
+
+**2. Get your session ID:**
+1. Visit [Jimeng AI](https://jimeng.jianying.com/) and log in
+2. Press F12 → Application → Cookies
+3. Copy the `sessionid` value
+
+**3. Configure:**
+```bash
+mkdir -p ~/.nby-skills/nby-jimeng-api
+cp nby-jimeng-api/.env.example ~/.nby-skills/nby-jimeng-api/.env
+# Edit .env and set JIMENG_SESSION_ID=your_sessionid
+```
+
+Multiple accounts supported (comma-separated): `JIMENG_SESSION_ID=sid1,sid2`
+</details>
 
 ## Usage
 
@@ -100,6 +120,15 @@ After configuration, use natural language in Claude Code:
 # Smart Categorize
 > 归类这个页面
 > 整理到 Resources
+
+# Jimeng Image Generation
+> 即梦生图：一只可爱的橘猫
+> jimeng generate a sunset landscape
+> 用即梦画一张科技风配图
+
+# Jimeng Video Generation
+> 即梦视频：小猫在草地上奔跑
+> generate a video with jimeng
 ```
 
 ## License
