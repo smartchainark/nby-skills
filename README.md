@@ -2,7 +2,7 @@
 
 > NBY Team Skills for Claude Code
 
-A collection of Claude Code skills for Notion productivity workflows.
+A collection of Claude Code skills for productivity workflows — Notion, AI media generation, and more.
 
 ## Skills
 
@@ -12,6 +12,7 @@ A collection of Claude Code skills for Notion productivity workflows.
 | [nby-notion-smart-categorize](./nby-notion-smart-categorize/) | Intelligently categorize Notion pages into Resources subdirectories |
 | [nby-skill-library-manager](./nby-skill-library-manager/) | Skill library manager — organizes skills in a Git-versioned library with symlink-based enable/disable. Works alongside the official `skill-creator` plugin (it handles HOW, this handles WHERE) |
 | [nby-auto-edit](./nby-auto-edit/) | AI auto video editing — from raw recordings to finished video via ASR, green-screen, TTS, subtitles, and Remotion rendering |
+| [nby-jimeng-api](./nby-jimeng-api/) | Jimeng AI (即梦) image & video generation — text-to-image, image-to-image, text-to-video, Seedance 2.0 multimodal via OpenAI-compatible API |
 
 ## Installation
 
@@ -26,6 +27,7 @@ npx skills add smartchainark/nby-skills
 ```bash
 npx skills add smartchainark/nby-skills --skill nby-notion-reading-notes
 npx skills add smartchainark/nby-skills --skill nby-notion-smart-categorize
+npx skills add smartchainark/nby-skills --skill nby-jimeng-api
 ```
 
 ### List available skills

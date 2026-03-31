@@ -1,0 +1,16 @@
+# Jimeng API Preferences
+
+## Default Settings
+
+- Default image model: jimeng-4.6
+- Default video model: jimeng-video-3.5-pro
+- Default image resolution: 2k
+- Default image ratio: 1:1
+- Default video resolution: 720p
+- Default video ratio: 16:9
+- Default save directory: ./images/
+
+## Docker
+
+- Container name: jimeng-free-api-all
+- Port: 8000
