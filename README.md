@@ -110,26 +110,7 @@ Multiple accounts supported (comma-separated): `JIMENG_SESSION_ID=sid1,sid2`
 
 ## Usage
 
-After configuration, use natural language in Claude Code:
-
-```
-# Reading Notes
-> AI精读
-> 精读 inbox 文章
-
-# Smart Categorize
-> 归类这个页面
-> 整理到 Resources
-
-# Jimeng Image Generation
-> 即梦生图：一只可爱的橘猫
-> jimeng generate a sunset landscape
-> 用即梦画一张科技风配图
-
-# Jimeng Video Generation
-> 即梦视频：小猫在草地上奔跑
-> generate a video with jimeng
-```
+After installation and configuration, just use natural language in Claude Code. Each skill is triggered automatically based on your request. See individual skill directories for detailed usage and examples.
 
 ## License
 

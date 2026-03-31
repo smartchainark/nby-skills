@@ -109,24 +109,7 @@ cp nby-jimeng-api/.env.example ~/.nby-skills/nby-jimeng-api/.env
 
 ## 使用
 
-配置完成后，在 Claude Code 中用自然语言触发：
-
-```
-# 精读笔记
-> AI精读
-> 精读 inbox 文章
-
-# 智能归类
-> 归类这个页面
-> 整理到 Resources
-
-# 即梦生图
-> 即梦生图：一只可爱的橘猫
-> 用即梦画一张科技风配图
-
-# 即梦视频
-> 即梦视频：小猫在草地上奔跑
-```
+安装配置完成后，在 Claude Code 中用自然语言即可触发对应技能。详细用法和示例请查看各技能目录下的说明。
 
 ## License
 
