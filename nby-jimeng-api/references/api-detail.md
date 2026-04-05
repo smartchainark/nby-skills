@@ -1,10 +1,10 @@
 # Jimeng API Detailed Parameters & Responses
 
-## Image Generation
+## Text-to-Image
 
 **POST /v1/images/generations**
 
-Unified endpoint for both text-to-image and image-to-image.
+纯文生图端点。**注意：该端点的 `images` 参数不生效（源码未处理），不支持图生图。** 如需图生图请使用 `/v1/images/compositions`。
 
 ### Parameters
 
@@ -12,16 +12,11 @@ Unified endpoint for both text-to-image and image-to-image.
 |-------|------|----------|---------|-------------|
 | model | string | No | jimeng-4.5 | Model name |
 | prompt | string | Yes | - | Image description |
-| images | array | No | - | Image URLs (1-10). If provided, runs image-to-image mode |
 | negative_prompt | string | No | "" | Negative prompt |
 | ratio | string | No | 1:1 | Aspect ratio: 1:1, 4:3, 3:4, 16:9, 9:16, 3:2, 2:3, 21:9 |
 | resolution | string | No | 2k | Resolution: 1k, 2k, 4k |
 | sample_strength | number | No | 0.5 | Refinement strength 0-1 |
 | response_format | string | No | url | `url` or `b64_json` |
-
-### Request Formats
-
-Supports both `application/json` (images as URL array) and `multipart/form-data` (file upload via `images` field).
 
 ### Success Response
 
@@ -39,15 +34,81 @@ Supports both `application/json` (images as URL array) and `multipart/form-data`
 
 Typically returns 4 images per request.
 
-For image-to-image mode, response additionally includes `input_images` and `composition_type` fields.
-
 ---
 
-## Image Composition (Legacy)
+## Image-to-Image (Composition)
 
 **POST /v1/images/compositions**
 
-Backward-compatible image-to-image endpoint. Identical behavior to `/v1/images/generations` with `images` parameter.
+图生图专用端点。支持两种请求格式：JSON 模式和 multipart/form-data 文件上传模式。
+
+### Parameters
+
+| Param | Type | Required | Default | Description |
+|-------|------|----------|---------|-------------|
+| model | string | No | jimeng-4.5 | Model name |
+| prompt | string | Yes | - | Image description / transformation instruction |
+| images | array | No | - | 参考图 URL 数组 (1-10)，用于 JSON 模式 |
+| negative_prompt | string | No | "" | Negative prompt |
+| ratio | string | No | 1:1 | Aspect ratio: 1:1, 4:3, 3:4, 16:9, 9:16, 3:2, 2:3, 21:9 |
+| resolution | string | No | 2k | Resolution: 1k, 2k, 4k |
+| sample_strength | number | No | 0.5 | Refinement strength 0-1（**注意：multipart 模式下可能报错 "Params body.sample_strength invalid"，建议用 JSON 模式**） |
+| response_format | string | No | url | `url` or `b64_json` |
+
+### Request Format 1: JSON（推荐）
+
+`Content-Type: application/json`，通过 `images` 字段传入参考图 URL 数组。
+
+```bash
+curl -s -X POST http://localhost:8000/v1/images/compositions \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JIMENG_SESSION_ID" \
+  -d '{
+    "model": "jimeng-4.6",
+    "prompt": "将图片转换为水彩画风格",
+    "images": ["https://example.com/input.jpg"],
+    "sample_strength": 0.5
+  }'
+```
+
+### Request Format 2: multipart/form-data（文件上传）
+
+通过 `images` 字段上传本地文件。
+
+```bash
+curl -s -X POST http://localhost:8000/v1/images/compositions \
+  -H "Authorization: Bearer $JIMENG_SESSION_ID" \
+  -F "model=jimeng-4.6" \
+  -F "prompt=将图片转换为水彩画风格" \
+  -F "images=@/path/to/input.jpg"
+```
+
+### Success Response
+
+成功的图生图返回会额外包含 `input_images` 和 `composition_type` 字段，可用来验证参考图是否生效：
+
+```json
+{
+  "created": 1774966621,
+  "input_images": ["https://..."],
+  "composition_type": "...",
+  "data": [
+    {"url": "https://p26-dreamina-sign.byteimg.com/.../image.png"},
+    {"url": "https://p3-dreamina-sign.byteimg.com/.../image.png"},
+    {"url": "https://p26-dreamina-sign.byteimg.com/.../image.png"},
+    {"url": "https://p26-dreamina-sign.byteimg.com/.../image.png"}
+  ]
+}
+```
+
+### 两个端点的区别总结
+
+| | `/v1/images/generations` | `/v1/images/compositions` |
+|---|---|---|
+| 用途 | 纯文生图 | 图生图（参考图 + 提示词） |
+| `images` 参数 | **不生效**（源码未处理） | 生效，支持 URL 数组或文件上传 |
+| 请求格式 | JSON | JSON 或 multipart/form-data |
+| 返回特有字段 | - | `input_images`, `composition_type` |
 
 ---
 

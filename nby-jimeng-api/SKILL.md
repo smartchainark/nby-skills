@@ -67,7 +67,8 @@ Multiple accounts supported (comma-separated): `JIMENG_SESSION_ID=sid1,sid2,sid3
 | Task | Endpoint | Recommended Model |
 |------|----------|-------------------|
 | Text-to-image | `POST /v1/images/generations` | `jimeng-4.6` or `jimeng-5.0` |
-| Image-to-image | `POST /v1/images/generations` (add `images` param) | `jimeng-4.6` |
+| Image-to-image (JSON) | `POST /v1/images/compositions` (images 传 URL 数组) | `jimeng-4.6` |
+| Image-to-image (upload) | `POST /v1/images/compositions` (multipart/form-data 文件上传) | `jimeng-4.6` |
 | Text-to-video (sync) | `POST /v1/videos/generations` | `jimeng-video-3.5-pro` |
 | Text-to-video (async) | `POST /v1/videos/generations/async` | `jimeng-video-3.5-pro` |
 | Query async result | `GET /v1/videos/generations/async/:taskId` | - |
@@ -118,10 +119,15 @@ curl -s -o output.png "IMAGE_URL"
 
 ## Image-to-Image
 
-Same endpoint, add `images` array (1-10 image URLs):
+> **重要**: `/v1/images/generations` 端点的 `images` 参数实际上不生效（源码未处理），该端点只支持纯文生图。
+> 真正的图生图必须使用 `/v1/images/compositions` 端点。
+
+### 方式一：JSON 模式（推荐）
+
+通过 `images` 传入参考图 URL 数组：
 
 ```bash
-curl -s -X POST http://localhost:8000/v1/images/generations \
+curl -s -X POST http://localhost:8000/v1/images/compositions \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $JIMENG_SESSION_ID" \
   -d '{
@@ -131,6 +137,33 @@ curl -s -X POST http://localhost:8000/v1/images/generations \
     "ratio": "1:1",
     "resolution": "2k"
   }'
+```
+
+### 方式二：multipart/form-data 文件上传
+
+```bash
+curl -s -X POST http://localhost:8000/v1/images/compositions \
+  -H "Authorization: Bearer $JIMENG_SESSION_ID" \
+  -F "model=jimeng-4.6" \
+  -F "prompt=将图片转换为水彩画风格" \
+  -F "ratio=1:1" \
+  -F "resolution=2k" \
+  -F "images=@/path/to/input.jpg"
+```
+
+> **注意**: `sample_strength` 参数在 multipart 模式下可能报错 "Params body.sample_strength invalid"，建议使用 JSON 模式传递该参数。
+
+### 验证参考图是否生效
+
+成功的图生图返回会包含 `input_images` 和 `composition_type` 字段，可用来确认参考图已生效：
+
+```json
+{
+  "created": 1774966621,
+  "input_images": ["https://..."],
+  "composition_type": "...",
+  "data": [{"url": "https://..."}]
+}
 ```
 
 ## Video Generation (Sync)
