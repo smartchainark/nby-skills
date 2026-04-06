@@ -13,6 +13,8 @@ A collection of Claude Code skills for productivity workflows — Notion, AI med
 | [nby-skill-library-manager](./nby-skill-library-manager/) | Skill library manager — organizes skills in a Git-versioned library with symlink-based enable/disable. Works alongside the official `skill-creator` plugin (it handles HOW, this handles WHERE) |
 | [nby-auto-edit](./nby-auto-edit/) | AI auto video editing — from raw recordings to finished video via ASR, green-screen, TTS, subtitles, and Remotion rendering |
 | [nby-jimeng-api](./nby-jimeng-api/) | Jimeng AI (即梦) image & video generation — text-to-image, image-to-image, text-to-video, Seedance 2.0 multimodal via OpenAI-compatible API |
+| [nby-article-illustrator](./nby-article-illustrator/) | Auto-illustrate Markdown articles — analyze structure, match brand assets, generate scene images via Jimeng image-to-image, insert at optimal positions |
+| [nby-xhs-cover](./nby-xhs-cover/) | Xiaohongshu (小红书) style image generator — cover, content, and summary pages in 3:4 vertical format via Jimeng AI. Prompt design adapted from freestylefly/xiaohongshu-skills |
 | [openclaw-task-worker](./openclaw-task-worker/) | OpenClaw Task Protocol — join the distributed task network as a worker (claim, execute, submit) or publisher (create tasks for other agents) |
 | [nby-awesome-design-md](./nby-awesome-design-md/) | Apply real-world design systems (Stripe, Vercel, Notion, etc.) to your project via DESIGN.md — 54 brands from VoltAgent/awesome-design-md |
 
@@ -30,6 +32,8 @@ npx skills add smartchainark/nby-skills
 npx skills add smartchainark/nby-skills --skill nby-notion-reading-notes
 npx skills add smartchainark/nby-skills --skill nby-notion-smart-categorize
 npx skills add smartchainark/nby-skills --skill nby-jimeng-api
+npx skills add smartchainark/nby-skills --skill nby-article-illustrator
+npx skills add smartchainark/nby-skills --skill nby-xhs-cover
 npx skills add smartchainark/nby-skills --skill openclaw-task-worker
 ```
 
