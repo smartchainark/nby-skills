@@ -1,0 +1,24 @@
+{
+  "name": "nby-xhs-cover",
+  "version": "1.0.0",
+  "description": "小红书风格封面/内容/总结图生成器，基于即梦 API",
+  "type": "module",
+  "main": "scripts/handler.ts",
+  "scripts": {
+    "start": "tsx scripts/handler.ts"
+  },
+  "keywords": [
+    "xiaohongshu",
+    "小红书",
+    "cover",
+    "jimeng",
+    "即梦",
+    "image-generation"
+  ],
+  "author": "smartchainark",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsx": "^4.0.0"
+  }
+}
